@@ -1,6 +1,6 @@
 const taskInput = document.getElementById('new-task'); // Input for new task
 const addButton = document.getElementById('button-add'); // Button for creating new task
-const incompleteTaskHolder = document.getElementById('incompleted-tasks'); // ul of #incompleted-tasks
+const incompletedTaskHolder = document.getElementById('incompleted-tasks'); // ul of #incompleted-tasks
 const completedTasksHolder = document.getElementById('completed-tasks'); // ul of #completed-tasks
 
 const createNewTaskElement = function (taskString) {
@@ -40,8 +40,8 @@ const addTask = function () {
   if (!taskInput.value) return;
   const listItem = createNewTaskElement(taskInput.value);
 
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  incompletedTaskHolder.appendChild(listItem);
+  bindTaskEvents(listItem);
 
   taskInput.value = '';
 };
@@ -70,37 +70,37 @@ const deleteTask = function () {
   ul.removeChild(listItem);
 };
 
-const taskCompleted = function () {
+const handleTaskCheckBoxEvent = function () {
   const listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
-};
-
-const taskIncomplete = function () {
-  const listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  const isTaskCompleted = listItem.querySelector('input[type=checkbox]').checked;
+  if (isTaskCompleted) {
+    completedTasksHolder.appendChild(listItem);
+    bindTaskEvents(listItem);
+  } else {
+    incompletedTaskHolder.appendChild(listItem);
+    bindTaskEvents(listItem);
+  }
 };
 
 addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 
-const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
+const bindTaskEvents = function (taskListItem) {
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
   const editButton = taskListItem.querySelector('button.button--edit');
   const deleteButton = taskListItem.querySelector('button.button--delete');
 
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
+  checkBox.onchange = handleTaskCheckBoxEvent;
 };
 
-for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
+for (let i = 0; i < incompletedTaskHolder.children.length; i++) {
+  bindTaskEvents(incompletedTaskHolder.children[i]);
 }
 
 for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+  bindTaskEvents(completedTasksHolder.children[i]);
 }
 
 // Issues with usability don't get seen until they are in front of a human tester.
