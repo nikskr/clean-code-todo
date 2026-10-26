@@ -46,13 +46,12 @@ const addTask = function () {
   taskInput.value = '';
 };
 
-const editTask = function () {
-  const listItem = this.parentNode;
-
-  const editInput = listItem.querySelector('input[type=text]');
+const fillTaskFields = function (listItem) {
+  const isTaskEditMode = listItem.classList.contains('edit-mode');
   const label = listItem.querySelector('label');
   const editBtn = listItem.querySelector('.button--edit');
-  const isTaskEditMode = listItem.classList.contains('edit-mode');
+  const editInput = listItem.querySelector('input[type=text]');
+
   if (isTaskEditMode) {
     label.innerText = editInput.value;
     editBtn.innerText = 'Edit';
@@ -60,6 +59,12 @@ const editTask = function () {
     editInput.value = label.innerText;
     editBtn.innerText = 'Save';
   }
+};
+
+const editTask = function () {
+  const listItem = this.parentNode;
+
+  fillTaskFields(listItem);
 
   listItem.classList.toggle('edit-mode');
 };
