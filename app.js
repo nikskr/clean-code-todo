@@ -75,10 +75,8 @@ const handleTaskCheckBoxEvent = function () {
   const isTaskCompleted = listItem.querySelector('input[type=checkbox]').checked;
   if (isTaskCompleted) {
     completedTasksHolder.appendChild(listItem);
-    bindTaskEvents(listItem);
   } else {
     incompletedTaskHolder.appendChild(listItem);
-    bindTaskEvents(listItem);
   }
 };
 
