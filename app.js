@@ -9,7 +9,7 @@
 
 const taskInput = document.getElementById('new-task'); //Add a new task.
 const addButton = document.getElementsByTagName('button')[0]; //first button
-const incompleteTaskHolder = document.getElementById('incomplete-tasks'); //ul of #incompleteTasks
+const incompleteTaskHolder = document.getElementById('incomplete-tasks'); //ul of #incomplete-tasks
 const completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
 
 //New task list item
@@ -38,9 +38,9 @@ const createNewTaskElement = function (taskString) {
   editInput.className = 'task';
 
   editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
-  editButton.className = 'edit';
+  editButton.className = 'button--edit';
 
-  deleteButton.className = 'delete';
+  deleteButton.className = 'button--delete';
   deleteButtonImg.src = './remove.svg';
   deleteButton.appendChild(deleteButtonImg);
 
@@ -72,7 +72,7 @@ const editTask = function () {
 
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('label');
-  const editBtn = listItem.querySelector('.edit');
+  const editBtn = listItem.querySelector('.button--edit');
   const containsClass = listItem.classList.contains('editMode');
   //If class of the parent is .editmode
   if (containsClass) {
@@ -123,8 +123,8 @@ addButton.addEventListener('click', addTask);
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   //select ListItems children
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
-  const editButton = taskListItem.querySelector('button.edit');
-  const deleteButton = taskListItem.querySelector('button.delete');
+  const editButton = taskListItem.querySelector('button.button--edit');
+  const deleteButton = taskListItem.querySelector('button.button--delete');
 
   //Bind editTask to edit button.
   editButton.onclick = editTask;
