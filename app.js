@@ -94,12 +94,8 @@ const bindTaskEvents = function (taskListItem) {
   checkBox.onchange = handleTaskCheckBoxEvent;
 };
 
-for (let i = 0; i < incompletedTaskHolder.children.length; i++) {
-  bindTaskEvents(incompletedTaskHolder.children[i]);
-}
-
-for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i]);
-}
+document.querySelectorAll('#incompleted-tasks li, #completed-tasks li').forEach((el) => {
+  bindTaskEvents(el);
+});
 
 // Issues with usability don't get seen until they are in front of a human tester.
