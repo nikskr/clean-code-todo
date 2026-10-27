@@ -97,5 +97,3 @@ const bindTaskEvents = function (taskListItem) {
 document.querySelectorAll('#incompleted-tasks li, #completed-tasks li').forEach((el) => {
   bindTaskEvents(el);
 });
-
-// Issues with usability don't get seen until they are in front of a human tester.
