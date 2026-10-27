@@ -85,7 +85,6 @@ const handleTaskCheckBoxEvent = function () {
   }
 };
 
-addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 
 const bindTaskEvents = function (taskListItem) {
